@@ -276,13 +276,10 @@ const ManageMatches = ({ tournamentData }) => {
             <h2>Create a Match</h2>
             <section
               className="p-4 p-md-5"
-              style={{
-                backgroundImage:
-                  "url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp)",
-              }}
+             
             >
               <div className="row d-flex justify-content-center">
-                <div className="col-md-10 col-lg-8">
+                <div className="col-md-12 col-lg-12">
                   <div className="card rounded-3 mb-4">
                     <div className="card-body p-4">
                       <div className="text-center mb-4">
@@ -290,7 +287,6 @@ const ManageMatches = ({ tournamentData }) => {
                         <h6>Payment</h6>
                       </div>
                       <form onSubmit={matchForm.handleSubmit}>
-                        <p className="fw-bold mb-4 pb-2">Saved cards:</p>
                         <div className="d-flex flex-row align-items-center mb-4 pb-1">
                           <img
                             className=""
@@ -318,7 +314,9 @@ const ManageMatches = ({ tournamentData }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="d-flex flex-row align-items-center mb-4 pb-1">
+                        <div className="row">
+                          <div className="col-md-6">
+                          <div className="d-flex flex-row align-items-center mb-4 pb-1">
                           <img
                             className=""
                             width={50}
@@ -327,6 +325,7 @@ const ManageMatches = ({ tournamentData }) => {
                           />
                           <div className="flex-fill mx-3">
                             <div className="">
+                              <label htmlFor="scheduled" className="fw-bold">Select Date & Time of Match</label>
                               <input
                                 type="datetime-local"
                                 id="scheduled"
@@ -338,6 +337,38 @@ const ManageMatches = ({ tournamentData }) => {
                             </div>
                           </div>
                         </div>
+                          </div>
+                          <div className="col-md-6">
+                          <div className="d-flex flex-row align-items-center mb-4 pb-1">
+                          <img
+                            className=""
+                            width={50}
+                            alt=""
+                            src="/calender.png"
+                          />
+                          <div className="flex-fill mx-3">
+                            <div className="">
+                            <label htmlFor="scheduled" className="fw-bold">Select Match Category</label>
+                              <select
+                                id="category"
+                                value={matchForm.values.category}
+                                onChange={matchForm.handleChange}
+                                placeholder="Select Category"
+                                className="form-control"
+                              >
+                                {
+                                  tournamentData.categories.map((cat)=>(
+                                    <option value={cat}>{cat}</option>
+                                  ))
+                                }
+                              </select>
+                              
+                            </div>
+                          </div>
+                        </div>
+                          </div>
+                        </div>
+                        
 
                         <div className="row justify-content-around align-items-center">
                           <div className="col-md-4">

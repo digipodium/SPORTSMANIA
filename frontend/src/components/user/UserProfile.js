@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import app_config from "../../config";
 import Swal from "sweetalert2";
+import { useFormik } from "formik";
 
 const UserProfile = () => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
+
+  const {secondaryColor} = app_config;
 
   const [passwordHidden, setPasswordHidden] = useState(true);
 
@@ -67,6 +70,11 @@ const UserProfile = () => {
     }
   };
 
+  const profileForm = useFormik({
+    initialValues: currentUser,
+    onSubmit: updateProfile
+  })
+
 
   return (
     <div>
@@ -74,8 +82,8 @@ const UserProfile = () => {
         <div className="row">
           <div className="col-md-4 mb-4">
             <div className="card mb-4">
-              <div className="card-header py-3">
-                <h5 className="mb-0">Summary</h5>
+              <div className="card-header py-3" style={{backgroundColor: secondaryColor}}>
+                <h5 className="mb-0 text-white">Pofile Details</h5>
               </div>
               <div className="card-body">
                 <img
@@ -89,7 +97,7 @@ const UserProfile = () => {
                   alt=""
                 />
                 <label
-                  className="btn btn-outline-secondary w-100 mt-3"
+                  className="btn btn-outline-secondary w-100 my-4 d-block"
                   htmlFor="upload-image"
                 >
                   {" "}
@@ -101,9 +109,10 @@ const UserProfile = () => {
                   onChange={uploadProfileImage}
                   id="upload-image"
                 />
+                <p className="text-center">Welcome
+                  Back</p>
                 <p className="text-center">
-                  Hello <span className="h4">{currentUser.name}</span>! Welcome
-                  Back
+                  <span className="h4">{currentUser.name}</span>
                 </p>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
@@ -138,13 +147,13 @@ const UserProfile = () => {
           </div>
           <div className="col-md-8 mb-4">
             <div className="card mb-4">
-              <div className="card-header py-3">
-                <h5 className="mb-0">Biling details</h5>
+              <div className="card-header py-3" style={{backgroundColor: secondaryColor}}>
+                <h5 className="mb-0 text-white">Biling details</h5>
               </div>
               <div className="card-body">
-                <form>
+                <form onSubmit={profileForm.handleSubmit}>
                   {/* 2 column grid layout with text inputs for the first and last names */}
-                  <div className="row mb-4">
+                  <div className=" mb-4">
                     <div className="col">
                       <div className="">
                       <label className="form-label" htmlFor="form7Example1">
@@ -152,98 +161,50 @@ const UserProfile = () => {
                         </label>
                         <input
                           type="text"
-                          id="form7Example1"
+                          id="name"
+                          value={profileForm.values.name}
+                          onChange={profileForm.handleChange}
                           className="form-control"
                         />
                         
                       </div>
                     </div>
-                    <div className="col">
+                    
+                  </div>
+                  <div className="mb-4">
                       <div className="">
                       <label className="form-label" htmlFor="form7Example2">
-                          Last name
+                          Email
                         </label>
                         <input
-                          type="text"
-                          id="form7Example2"
+                          type="email"
+                          id="email"
+                          value={profileForm.values.email}
+                          onChange={profileForm.handleChange}
                           className="form-control"
                         />
                         
                       </div>
                     </div>
-                  </div>
                   {/* Text input */}
                   <div className=" mb-4">
                   <label className="form-label" htmlFor="form7Example3">
-                      Company name
+                      Password
                     </label>
                     <input
-                      type="text"
-                      id="form7Example3"
+                      type="password"
+                      id="password"
+                      value={profileForm.values.password}
+                      onChange={profileForm.handleChange}
                       className="form-control"
                     />
                    
                   </div>
-                  {/* Text input */}
-                  <div className=" mb-4">
-                  <label className="form-label" htmlFor="form7Example4">
-                      Address
-                    </label>
-                    <input
-                      type="text"
-                      id="form7Example4"
-                      className="form-control"
-                    />
-                   
-                  </div>
-                  {/* Email input */}
-                  <div className=" mb-4">
-                  <label className="form-label" htmlFor="form7Example5">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="form7Example5"
-                      className="form-control"
-                    />
-                    
-                  </div>
-                  {/* Number input */}
-                  <div className="form-outline mb-4">
-                    <input
-                      type="number"
-                      id="form7Example6"
-                      className="form-control"
-                    />
-                    <label className="form-label" htmlFor="form7Example6">
-                      Phone
-                    </label>
-                  </div>
-                  {/* Message input */}
-                  <div className="form-outline mb-4">
-                    <textarea
-                      className="form-control"
-                      id="form7Example7"
-                      rows={4}
-                      defaultValue={""}
-                    />
-                    <label className="form-label" htmlFor="form7Example7">
-                      Additional information
-                    </label>
-                  </div>
-                  {/* Checkbox */}
-                  <div className="form-check d-flex justify-content-center mb-2">
-                    <input
-                      className="form-check-input me-2"
-                      type="checkbox"
-                      defaultValue=""
-                      id="form7Example8"
-                      defaultChecked=""
-                    />
-                    <label className="form-check-label" htmlFor="form7Example8">
-                      Create an account?
-                    </label>
-                  </div>
+                  
+                  
+                 
+                  
+                  <button className="btn btn-primary"> <i class="fa-solid fa-arrows-rotate"></i> Update Profile</button>
                 </form>
               </div>
             </div>

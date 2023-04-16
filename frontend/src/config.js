@@ -2,6 +2,7 @@ const app_config = {
   apiUrl: "http://localhost:5000",
   title: "SPORTSMANIA",
   themeColor: "#0e8aee",
+  secondaryColor : '#0e8aee',
   status: {
     login: {
       success: 201,

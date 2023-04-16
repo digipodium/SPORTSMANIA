@@ -59,52 +59,44 @@ const AddPlayer = ({refreshPlayerList, tournamentData}) => {
 
   return (
     <div>
-      <section className="py-5" style={{ backgroundColor: "#2779e2" }}>
-        <div className="container h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col-xl-9">
-              <h1 className="text-white mb-4">Apply for a job</h1>
+      <section className="py-5">
+        <div className="container-fluid">
+          <div className="row d-flex justify-content-center align-items-center">
+            <div className="">
+              
               <div className="card" style={{ borderRadius: 15 }}>
-                <div className="card-body">
+                <div className="card-body p-5">
+                <h1 className="mb-4">Add new {tournamentData.game} Player</h1>
                   <form onSubmit={playerForm.handleSubmit}>
-                    <div className="row align-items-center pt-4 pb-3">
-                      <div className="col-md-3 ps-5">
-                        <h6 className="mb-0">Player Name</h6>
-                      </div>
-                      <div className="col-md-9 pe-5">
+                    <div className="row align-items-center">
+                      <div className="col-md-6 mb-4">
+                        <label>Player Name</label>
                         <input
                           type="text"
-                          className="form-control form-control-lg"
+                          className="form-control"
                           id="name"
                           onChange={playerForm.handleChange}
                           value={playerForm.values.name}
                         />
                       </div>
-                    </div>
-
-                    <hr className="mx-n3" />
-                    <div className="row align-items-center py-3">
-                      <div className="col-md-3 ps-5">
-                        <h6 className="mb-0">Upload CV</h6>
-                      </div>
-                      <div className="col-md-9 pe-5">
+                      <div className="col-md-6 mb-4">
+                        <label htmlFor="upload-image" className="btn btn-dark"> <i class="fas fa-upload"></i> Upload Player Image</label>
                         <input
-                          className="form-control form-control-lg"
-                          id="formFileLg"
+                        hidden
+                          className="form-control"
                           type="file"
+                          id="upload-image"
                           accept=".jpg, .jpeg, .png"
                           maxFileSize="2000000"
                           onChange={uploadImage}
 
                           // 2mb
                         />
-                        
                       </div>
                     </div>
-                    <hr className="mx-n3" />
-                    <div className="px-5 py-4">
+                    <div className="py-4">
                       <button type="submit" className="btn btn-primary btn-lg">
-                        Send application
+                        Add Player to {tournamentData.title}
                       </button>
                     </div>
                   </form>
@@ -140,7 +132,7 @@ const ManagePlayer = ({tournamentData}) => {
   const displayPlayers = () => {
     return playerList.map((player) => {
       return (
-        <div className="col-md-4">
+        <div className="col-md-2">
           <div className="card">
             <img className="card-img-top" src={url+'/'+player.image} alt="" />
             <div className="card-body">

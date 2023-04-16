@@ -119,7 +119,7 @@ const ManageTournament = () => {
               role="tabpanel"
               aria-labelledby="ex-with-icons-tab-2"
             >
-              <ManageMatches tournamentData={ tournamentList[selTournament] } />
+              <ManageMatches tournamentData={tournamentList[selTournament]} />
             </div>
             <div
               className="tab-pane fade"
@@ -127,7 +127,10 @@ const ManageTournament = () => {
               role="tabpanel"
               aria-labelledby="ex-with-icons-tab-3"
             >
-              <ManageCategories tournamentData={tournamentList[selTournament]} refreshData={getUserTournament} />
+              <ManageCategories
+                tournamentData={tournamentList[selTournament]}
+                refreshData={getUserTournament}
+              />
             </div>
             <div
               className="tab-pane fade"
@@ -135,7 +138,7 @@ const ManageTournament = () => {
               role="tabpanel"
               aria-labelledby="ex-with-icons-tab-4"
             >
-              <ManageScores />
+              <ManageScores tournamentData={tournamentList[selTournament]} />
             </div>
           </div>
         </>
@@ -143,28 +146,44 @@ const ManageTournament = () => {
   };
 
   return (
-    <div>
-      <h1>ManageTournament</h1>
-      <hr />
-
-      <div className="row">
-        <div className="col-2">
-        
-            {
-                tournamentList &&
-                tournamentList.map((tournament, index) => (
-                    <button onClick={e => setSelTournament(index)} className="btn btn-danger mt-3">{tournament.title}</button>
-                ))
+    <div style={{backgroundImage: `url("/pattern.png")`, minHeight: '100vh' }}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <div className="card mt-5">
+                  <div className="card-header">
+                  <h3>My Tournaments</h3>
+                  </div>
+              <div className="card-body">
+              {tournamentList &&
+              tournamentList.map((tournament, index) => (
+                <button
+                  onClick={(e) => setSelTournament(index)}
+                  className="btn btn-danger mt-3 w-100"
+                >
+                  {tournament.title}
+                </button>
+              ))}
+              </div>
+            </div>
+            
+          </div>
+          <div className="col-md-10">
+            <div className="p-5">
+              <h1 className="display-4">ManageTournament</h1>
+              <hr />
+              
+              { selTournament!==null ? 
+              displayTabs()
+            :
+                <p className="display-1 mt-5" style={{color: '#aaa'}}>Choose a Tournament to View and Manage</p>
             }
-  
+            </div>
+          </div>
+        </div>
 
-        </div>
-        <div className="col-8">
-          <div className="p-4">{displayTabs()}</div>
-        </div>
+        {/* <CreateMatch /> */}
       </div>
-
-      {/* <CreateMatch /> */}
     </div>
   );
 };
