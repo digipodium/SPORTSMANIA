@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import app_config from '../../config';
+import { useFormik } from 'formik';
+import { toast } from 'react-hot-toast';
 
 const ScoreUpdateScreen = ({matchData}) => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
@@ -8,6 +10,7 @@ const ScoreUpdateScreen = ({matchData}) => {
   const {apiUrl} = app_config;
   const [selMatch, setSelMatch] = useState(null);
   
+
 
   const updateScore = async () => {
     setLoading(true);
@@ -23,6 +26,7 @@ const ScoreUpdateScreen = ({matchData}) => {
     console.log(res.status);
     setLoading(false);
   }
+
 
   return (
     <div>
@@ -48,6 +52,7 @@ const ManageScores = ({tournamentData}) => {
   const {apiUrl} = app_config;
   const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
   const [loading, setLoading] = useState(false);
+  const [selMatch, setSelMatch] = useState(null);
 
 
   const fetchMatchList = async () => {
@@ -71,6 +76,23 @@ const ManageScores = ({tournamentData}) => {
 
   }
 
+  const deleteMatch = async (id) => {
+    
+    const res = await fetch(`${apiUrl}/match/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res.status);
+  toast.success("Match Deleted Successfully");
+    fetchMatchList();
+  }
+
+
+
+
+
   const displayMatches = () => {
     if (loading) {
       return (
@@ -92,7 +114,10 @@ const ManageScores = ({tournamentData}) => {
               :
               <span className="badge badge-secondary bg-secondary">Not Started Yet</span>
             }
-            <button className='btn btn-primary' onClick={}>Update Score</button>
+            <button className='btn btn-primary' data-mdb-toggle="modal" data-mdb-target="#scoreModal" onClick={e => setSelMatch(index)}>Update Score</button>
+            <button className='btn btn-danger' onClick={e => deleteMatch(match._id)}>
+              <i class="fas fa-trash"></i>
+            </button>
           </div>
           <div className="card-body">
             <div className="row justify-content-around align-items-center">
@@ -136,7 +161,7 @@ const ManageScores = ({tournamentData}) => {
 
   <div
     className="modal fade"
-    id="exampleModal"
+    id="scoreModal"
     tabIndex={-1}
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -154,7 +179,9 @@ const ManageScores = ({tournamentData}) => {
             aria-label="Close"
           />
         </div>
-        <div className="modal-body">...</div>
+        <div className="modal-body">
+          <h1>Match Scores</h1>
+        </div>
         <div className="modal-footer">
           <button
             type="button"

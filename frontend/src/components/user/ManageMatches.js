@@ -38,6 +38,7 @@ const ManageMatches = ({ tournamentData }) => {
       title: "",
       type: "solo",
       tournament: tournamentData._id,
+      category: '',
       description: "",
       playerA: "",
       playerB: "",
