@@ -9,6 +9,7 @@ const tournamentRouter = require('./routers/tournamentRouter');
 const playerRouter = require('./routers/playerRouter');
 const utilRouter = require('./routers/utils');
 const matchRouter = require('./routers/matchRouter');
+const teamRouter = require('./routers/teamRouter');
 
 const cors = require('cors');
 const { PORT } = require('./config');
@@ -30,6 +31,7 @@ app.use('/tournament', tournamentRouter);
 app.use('/player', playerRouter);
 app.use('/match', matchRouter);
 app.use('/util', utilRouter);
+app.use('/team', teamRouter);
 
 app.use(express.static('./static/uploads'));
 

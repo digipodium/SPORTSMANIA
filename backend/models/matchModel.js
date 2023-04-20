@@ -9,7 +9,7 @@ const schema = new Schema({
   playerA: { type: Types.ObjectId, ref: "player" },
   playerB: { type: Types.ObjectId, ref: "player" },
   duration: Number,
-  matchData: Object,
+  matchData: {type : Object, default: {}},
   status: { type: String, default: "pending" },
   scheduled: Date,
   created_at: Date,

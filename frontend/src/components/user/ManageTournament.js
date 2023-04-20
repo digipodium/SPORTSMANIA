@@ -6,16 +6,21 @@ import ManagePlayer from "./ManagePlayer";
 import ManageMatches from "./ManageMatches";
 import ManageScores from "./ManageScores";
 import ManageCategories from "./ManageCategories";
+import ManageTeam from "./ManageTeams";
 
 const ManageTournament = () => {
   const { tour_id } = useParams();
   const url = app_config.apiUrl;
+
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(sessionStorage.getItem("user"))
   );
 
+  const { games } = app_config;
+
   const [tournamentList, setTournamentList] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isTeam, setIsTeam] = useState(false);
 
   const [selTournament, setSelTournament] = useState(null);
 
@@ -103,6 +108,22 @@ const ManageTournament = () => {
                 Scores
               </a>
             </li>
+            {isTeam && (
+              <li className="nav-item" role="presentation">
+                <a
+                  className="nav-link"
+                  id="ex-with-icons-tab-5"
+                  data-mdb-toggle="tab"
+                  href="#ex-with-icons-tabs-5"
+                  role="tab"
+                  aria-controls="ex-with-icons-tabs-5"
+                  aria-selected="false"
+                >
+                  <i className="fas fa-cogs fa-fw me-2" />
+                  Teams
+                </a>
+              </li>
+            )}
           </ul>
           <div className="tab-content" id="ex-with-icons-content">
             <div
@@ -140,44 +161,65 @@ const ManageTournament = () => {
             >
               <ManageScores tournamentData={tournamentList[selTournament]} />
             </div>
+
+            <div
+              className="tab-pane fade"
+              id="ex-with-icons-tabs-5"
+              role="tabpanel"
+              aria-labelledby="ex-with-icons-tab-5"
+            >
+              <ManageTeam tournamentData={tournamentList[selTournament]} />
+            </div>
           </div>
         </>
       );
   };
 
+  const selectTournament = (tournament, index) => {
+    setSelTournament(index);
+    console.log(games);
+    for (let game of games) {
+      if (game.name === tournament.game) {
+        setIsTeam(game.type === "team");
+        break;
+      }
+    }
+  };
+
   return (
-    <div style={{backgroundImage: `url("/pattern.png")`, minHeight: '100vh' }}>
+    <div style={{ backgroundImage: `url("/pattern.png")`, minHeight: "100vh" }}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
             <div className="card mt-5">
-                  <div className="card-header">
-                  <h3>My Tournaments</h3>
-                  </div>
+              <div className="card-header">
+                <h3>My Tournaments</h3>
+              </div>
               <div className="card-body">
-              {tournamentList &&
-              tournamentList.map((tournament, index) => (
-                <button
-                  onClick={(e) => setSelTournament(index)}
-                  className="btn btn-danger mt-3 w-100"
-                >
-                  {tournament.title}
-                </button>
-              ))}
+                {tournamentList &&
+                  tournamentList.map((tournament, index) => (
+                    <button
+                      onClick={(e) => selectTournament(tournament, index)}
+                      className="btn btn-danger mt-3 w-100"
+                    >
+                      {tournament.title}
+                    </button>
+                  ))}
               </div>
             </div>
-            
           </div>
           <div className="col-md-10">
             <div className="p-5">
               <h1 className="display-4">ManageTournament</h1>
               <hr />
-              
-              { selTournament!==null ? 
-              displayTabs()
-            :
-                <p className="display-1 mt-5" style={{color: '#aaa'}}>Choose a Tournament to View and Manage</p>
-            }
+
+              {selTournament !== null ? (
+                displayTabs()
+              ) : (
+                <p className="display-1 mt-5" style={{ color: "#aaa" }}>
+                  Choose a Tournament to View and Manage
+                </p>
+              )}
             </div>
           </div>
         </div>

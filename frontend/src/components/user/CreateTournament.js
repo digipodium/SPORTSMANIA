@@ -104,9 +104,8 @@ const CreateTournament = () => {
                               className="form-control form-control-lg"
                             >
                               {games
-                                .map((game) => game.name)
                                 .map((game) => (
-                                  <option value={game}>{game}</option>
+                                  <option value={game.name}>{game.name}</option>
                                 ))}
                             </select>
                           </div>

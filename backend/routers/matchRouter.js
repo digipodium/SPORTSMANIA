@@ -91,7 +91,7 @@ router.get("/getbyuser/:id", (req, res) => {
 });
 
 router.get("/getbytournament/:id", (req, res) => {
-  Model.find({tournament : req.params.id})
+  Model.find({tournament : req.params.id}).populate('playerA').populate('playerB')
     .then((result) => {
       console.log("User Data Retrieved");
       res.status(200).json({ status: "success", result });

@@ -18,7 +18,7 @@ const Home = () => {
           className="p-5 text-center bg-image"
           style={{
             backgroundImage:
-              'url("https://mdbcdn.b-cdn.net/img/new/slides/146.webp")',
+              'url("/arena.jpg")',
             height: 500,
             backgroundSize: "cover",
             backgroundPosition: "50% 50%",
@@ -35,8 +35,8 @@ const Home = () => {
                 <div className="col-lg-10">
                   <div className="text-white pb-md-5">
                     <h1 className="my-md-5 mb-4 px-4 px-md-5 display-3 fw-bold ls-tight">
-                      <span>The best offer on the market</span> <br />
-                      <span className="">for your business</span>
+                      <span>SPORTSMANIA</span> <br />
+                      <span className="">for every Tournament</span>
                     </h1>
                     <Link
                       className="btn btn-outline-light btn-lg py-3 px-5 me-2"

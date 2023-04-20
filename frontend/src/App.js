@@ -27,7 +27,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-      <Toaster position="top-center" />
+      <Toaster position="top-right" />
         <AdminProvider currentAdmin={currentAdmin}>
           <UserProvider currentUser={currentUser}>
             <Routes>

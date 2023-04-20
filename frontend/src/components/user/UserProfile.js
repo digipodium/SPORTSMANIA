@@ -77,7 +77,7 @@ const UserProfile = () => {
 
 
   return (
-    <div>
+    <div className="full-back" style={{backgroundImage: `url('/ground.jpg')`}}>
       <div className="container py-5">
         <div className="row">
           <div className="col-md-4 mb-4">
