@@ -13,4 +13,5 @@ const schema = new Schema({
   updated_at: Date,
 });
 
+
 module.exports = model("tournament", schema);

@@ -34,10 +34,10 @@ const Home = () => {
               <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-lg-10">
                   <div className="text-white pb-md-5">
-                    <h1 className="my-md-5 mb-4 px-4 px-md-5 display-3 fw-bold ls-tight">
-                      <span>SPORTSMANIA</span> <br />
-                      <span className="">for every Tournament</span>
-                    </h1>
+                    <p className="my-md-5 mb-4 px-4 px-md-5">
+                      <span className='h1 display-3 fw-bold ls-tight'>SPORTSMANIA</span> <br />
+                      <span className="h3 fw-bold ls-tight">Sports Tournament Organizer</span>
+                    </p>
                     <Link
                       className="btn btn-outline-light btn-lg py-3 px-5 me-2"
                       to="/user/browser"
